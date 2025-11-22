@@ -8,7 +8,13 @@ class Room extends Model
 {
     //
 
-    public function members(){
-        return $this->belongsToMany(User::class,'room_user')->withTimestamps()->withPivot('joined_at');
+    public function members()
+    {
+        return $this->belongsToMany(User::class, 'room_user')->withTimestamps()->withPivot('joined_at');
+    }
+
+    public function lastMessage()
+    {
+        return $this->hasOne(Message::class)->latestOfMany();
     }
 }
