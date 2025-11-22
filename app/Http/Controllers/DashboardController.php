@@ -13,10 +13,9 @@ class DashboardController extends Controller
 
     public function index(RoomService $roomService): Response
     {
-        $rooms = $roomService->getRooms('teto');
+        $rooms = $roomService->getRooms();
         
         dd($rooms);
-
         return Inertia::render('Index');
     }
 }
