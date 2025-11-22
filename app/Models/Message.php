@@ -12,4 +12,9 @@ class Message extends Model
     {
         return $this->hasMany(MessageUser::class)->where('recipient_id', '!=', auth()->id());
     }
+
+    public function statuses()
+    {
+        return $this->hasMany(MessageUser::class);
+    }
 }
