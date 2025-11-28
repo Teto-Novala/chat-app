@@ -1,11 +1,27 @@
 import Settings from "@/Components/Settings";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
 import List from '@/Components/List/Index';
 import Search from "@/Components/Search";
+import { useEffect, useState } from "react";
 
-export default function Welcome({ auth,data,search }) {
-    console.log(auth,data,search);
+export default function Welcome({ auth,data,searchTerm }) {
+    console.log(auth,data,searchTerm);
+
+    const [search,setSearch]=useState(searchTerm || '');
+
+    useEffect(()=>{
+        router.reload({
+            data:{
+                search,
+            },
+            only:['data'],
+            preserveUrl:true,
+            preserveState:true,
+            preserveScroll:true,
+
+        })
+    },[search])
     
     return (
         <AuthenticatedLayout>
@@ -23,7 +39,7 @@ export default function Welcome({ auth,data,search }) {
                                     <Settings />
                                 </div>
                             </div>
-                            <Search/>
+                            <Search search={search} setSearch={setSearch}/>
                         </div>
                         <div className="flex-1 px-4 overflow-y-auto">
                             <List title={"Rooms"} data={data.rooms} />
