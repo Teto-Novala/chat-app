@@ -14,10 +14,22 @@ class DashboardController extends Controller
     public function index(RoomService $roomService, Request $request): Response
     {
         $search = $request->query('search');
-        $rooms = $roomService->getRooms();
-        $contacts = $roomService->getContacts($search);
+        $data = [
+            'rooms' => [],
+            'contacts' => [],
+        ];
 
-        dd($contacts);
+        if ($search) {
+            $rooms = $roomService->getRooms();
+            $contacts = $roomService->getContacts($search);
+            $data['rooms'] = $rooms;
+            $data['contacts'] = $contacts;
+        } else {
+            $rooms = $roomService->getRooms();
+            $data['rooms'] = $rooms;
+        }
+
+        dd($data);
         return Inertia::render('Index');
     }
 }
