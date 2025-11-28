@@ -9,11 +9,22 @@ export default function Welcome({ auth,data,searchTerm }) {
     console.log(auth,data,searchTerm);
 
     const [search,setSearch]=useState(searchTerm || '');
+    const [debounceSearch,setDebounceSearch]=useState(search);
 
     useEffect(()=>{
+        const timer= setTimeout(()=>{
+            setDebounceSearch(search);
+        },500)
+
+        return ()=>  clearTimeout(timer);
+    },[search])
+
+    useEffect(()=>{
+        console.log(debounceSearch);
+        
         router.reload({
             data:{
-                search,
+                debounceSearch,
             },
             only:['data'],
             preserveUrl:true,
@@ -21,7 +32,7 @@ export default function Welcome({ auth,data,searchTerm }) {
             preserveScroll:true,
 
         })
-    },[search])
+    },[debounceSearch])
     
     return (
         <AuthenticatedLayout>
