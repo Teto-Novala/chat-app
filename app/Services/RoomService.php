@@ -51,6 +51,7 @@ class RoomService
                 'id' => $room->id,
                 'type' => $room->type,
                 'name' => $otherUser->name,
+                'user_id' => $otherUser->id,
                 'avatar' => $otherUser->avatar,
                 'lastMessage' => $returnLastMessage,
                 'totalUnread' => $totalUnread,
