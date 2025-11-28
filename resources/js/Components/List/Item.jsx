@@ -1,7 +1,17 @@
+import { useEffect, useState,memo } from "react";
 import LastMessage from "./LastMessage";
 
 const Item = ( {room } ) => {
-    console.log(room);
+
+    const [lastMessage,setLastMessage]=useState('');
+
+    useEffect(()=>{
+
+        if(room.lastMessage){
+            setLastMessage(room.lastMessage.content)
+        }
+
+    },[room])
     
 
   return (
@@ -14,11 +24,11 @@ const Item = ( {room } ) => {
           <p className="text-sm font-medium text-white truncate dark:text-white">
             {room.name}
           </p>
-          <LastMessage lastMessage={room.lastMessage.content}/>
+          <LastMessage lastMessage={lastMessage}/>
         </div>
       </div>
     </div>
   )
 }
 
-export default Item;
+export default memo(Item);

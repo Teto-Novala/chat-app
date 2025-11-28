@@ -1,4 +1,4 @@
-
+import { memo } from "react";
 
 const LastMessage = ({ lastMessage }) => {
 
@@ -9,4 +9,4 @@ const LastMessage = ({ lastMessage }) => {
   );
 }
 
-export default LastMessage;
+export default memo(LastMessage);
