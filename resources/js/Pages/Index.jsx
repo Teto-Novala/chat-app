@@ -2,6 +2,7 @@ import Settings from "@/Components/Settings";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import List from '@/Components/List/Index';
+import Search from "@/Components/Search";
 
 export default function Welcome({ auth,data,search }) {
     console.log(auth,data,search);
@@ -22,7 +23,7 @@ export default function Welcome({ auth,data,search }) {
                                     <Settings />
                                 </div>
                             </div>
-                            # SEARCH #
+                            <Search/>
                         </div>
                         <div className="flex-1 px-4 overflow-y-auto">
                             <List title={"Rooms"} data={data.rooms} />
