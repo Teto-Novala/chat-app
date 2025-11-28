@@ -1,8 +1,11 @@
 import Settings from "@/Components/Settings";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
+import List from '@/Components/List/Index';
 
-export default function Welcome({ auth }) {
+export default function Welcome({ auth,data,search }) {
+    console.log(auth,data,search);
+    
     return (
         <AuthenticatedLayout>
             <Head title="Teto CHAT" />
@@ -22,7 +25,8 @@ export default function Welcome({ auth }) {
                             # SEARCH #
                         </div>
                         <div className="flex-1 px-4 overflow-y-auto">
-                            # ROOM #
+                            <List title={"Rooms"} data={data.rooms} />
+                            <List title={"Contacts"} data={data.contacts} />
                         </div>
                     </div>
                 </div>
